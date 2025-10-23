@@ -1,0 +1,9 @@
+Package: enigma2-plugin-systemplugins-xmlupdate
+Version:
+Description: Fetches and updates transponder xml files.
+Section: extra
+Priority: optional
+Architecture: all
+License: unknown
+OE: openPLi
+Maintainer: Huevos/ahmedmoselhi <ahmedmoselhi55@gmail.com>
