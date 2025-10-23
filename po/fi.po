@@ -1,0 +1,84 @@
+# Finnish translations for xmlUpdate plugin package.
+# Copyright (C) 2018 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Automatically generated, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plugins 0.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-16 19:01+0430\n"
+"PO-Revision-Date: 2024-08-01 18:47+0300\n"
+"Last-Translator: Orlandox <http://www.huoltovalikko.com/>\n"
+"Language-Team: Tomppaa, Orlandox\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.4\n"
+
+msgid "/etc/enigma2"
+msgstr "/etc/enigma2"
+
+msgid "/etc/tuxbox (default)"
+msgstr "/etc/tuxbox (oletus)"
+
+msgid "Exit"
+msgstr "Poistu"
+
+msgid "Fetch"
+msgstr "Hae"
+
+#, python-format
+msgid ""
+"Fetching and saving %s.xml succeeded.\n"
+"Restart now for changes to take immediate effect?"
+msgstr ""
+"Noutaminen ja tallentaminen %s.xml onnistuivat.\n"
+"Käynnistettäänkö uudelleen nyt, jotta muutokset tulevat voimaan?"
+
+msgid "File being updated, i.e. satellites.xml, cables.xml, or terrestrial.xml."
+msgstr "Päivitettävä tiedosto eli satellites.xml, cables.xml, tai terrestrial.xml."
+
+msgid "Folder where the downloaded file will be saved. \"/etc/tuxbox\" is the default location. Files stored in \"/etc/enigma2\" override the default file and are not updated on a software update."
+msgstr "Kansio, johon ladattu tiedosto tallennetaan. \"/etc/tuxbox\" on oletussijainti. \"/etc/enigma2\" kansioon tallennetut tiedostot ohittavat oletus tiedoston, eikä niitä päivitetä ohjelmistopäivityksessä."
+
+msgid "OE-Alliance"
+msgstr "OE-Alliance"
+
+msgid "Online source where the transponder xml file is being retrieved from."
+msgstr "Online lähde, josta haetaan transponderi xml-tiedosto."
+
+msgid "Save to"
+msgstr "Tallenna nimellä"
+
+#, python-format
+msgid "Saving the %s.xml file failed"
+msgstr "%s.xml tiedoston tallentaminen epäonnistui"
+
+msgid "Source"
+msgstr "Lähde"
+
+#, python-format
+msgid "The %s.xml download was corrupt."
+msgstr "%s.xml lataus oli vioittunut."
+
+#, python-format
+msgid "The %s.xml file could not be fetched"
+msgstr "Tiedostoa %s.xml ei voitu noutaa"
+
+msgid "XML update"
+msgstr "XML päivitys"
+
+msgid "cable"
+msgstr "Kaapeli"
+
+msgid "satellite"
+msgstr "Satelliitti"
+
+msgid "terrestrial"
+msgstr "Antenni"
+
+msgid "For updating transponder xml files"
+msgstr "Transponderin xml-tiedostojen päivittämiseen"
