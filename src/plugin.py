@@ -27,7 +27,8 @@ class xmlUpdate(ConfigListScreen, Screen):
 		ConfigListScreen.__init__(self, [], session=session)
 
 		self.url = "https://raw.githubusercontent.com/oe-alliance/oe-alliance-tuxbox-common/master/src/%s.xml"
-		self.source = ConfigSelection(default="OE-Alliance", choices=[("OE-Alliance", _("OE-Alliance"))])
+		self.customSatellitesURL = "https://raw.githubusercontent.com/ahmedmoselhi/e2_channellist/scripts/satellites.xml"
+		self.source = ConfigSelection(default="OE-Alliance", choices=[("OE-Alliance", _("OE-Alliance")), ("Ahmedmoselhi-Custom-Config", _("Ahmedmoselhi-Custom-Config"))])
 		self.DVBtype = ConfigSelection(default="satellites", choices=[("satellites", _("satellite")), ("cables", _("cable")), ("terrestrial", _("terrestrial"))])
 		self.folder = ConfigSelection(default="/etc/tuxbox", choices=[("/etc/tuxbox", _("/etc/tuxbox (default)")), ("/etc/enigma2", _("/etc/enigma2"))])
 
@@ -90,8 +91,9 @@ class xmlUpdate(ConfigListScreen, Screen):
 
 	def fetchURL(self):
 		try:
-			print('[xmlUpdate][fetchURL] URL', self.url % self.DVBtype.value)
-			req = Request(self.url % self.DVBtype.value)
+			url = self.customSatellitesURL if self.source.value == "Ahmedmoselhi-Custom-Config" and self.DVBtype.value == "satellites" else self.url % self.DVBtype.value
+			print('[xmlUpdate][fetchURL] URL', url)
+			req = Request(url)
 			response = urlopen(req)
 			print('[xmlUpdate][fetchURL] Response: %d' % response.getcode())
 			if int(response.getcode()) == 200:
