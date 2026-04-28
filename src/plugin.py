@@ -8,7 +8,7 @@ from six.moves.urllib.error import URLError, HTTPError
 from six import ensure_str
 
 from Components.ActionMap import ActionMap
-from Components.config import ConfigSelection, getConfigListEntry
+from Components.config import ConfigSelection, ConfigSubsection, config, configfile, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.Sources.StaticText import StaticText
@@ -16,6 +16,9 @@ from Plugins.Plugin import PluginDescriptor
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Screens.Standby import TryQuitMainloop
+
+config.plugins.xmlupdate = ConfigSubsection()
+config.plugins.xmlupdate.source = ConfigSelection(default="OE-Alliance", choices=[("OE-Alliance", _("OE-Alliance")), ("Ahmedmoselhi-Custom-Config", _("Ahmedmoselhi-Custom-Config"))])
 
 
 class xmlUpdate(ConfigListScreen, Screen):
@@ -29,7 +32,7 @@ class xmlUpdate(ConfigListScreen, Screen):
 
 		self.url = "https://raw.githubusercontent.com/oe-alliance/oe-alliance-tuxbox-common/master/src/%s.xml"
 		self.customSatellitesURL = "https://raw.githubusercontent.com/ahmedmoselhi/e2_channellist/scripts/satellites.xml"
-		self.source = ConfigSelection(default="OE-Alliance", choices=[("OE-Alliance", _("OE-Alliance")), ("Ahmedmoselhi-Custom-Config", _("Ahmedmoselhi-Custom-Config"))])
+		self.source = config.plugins.xmlupdate.source
 		self.DVBtype = ConfigSelection(default="satellites", choices=[("satellites", _("satellite")), ("cables", _("cable")), ("terrestrial", _("terrestrial"))])
 		self.folder = ConfigSelection(default="/etc/tuxbox", choices=[("/etc/tuxbox", _("/etc/tuxbox (default)")), ("/etc/enigma2", _("/etc/enigma2"))])
 
@@ -70,6 +73,8 @@ class xmlUpdate(ConfigListScreen, Screen):
 		self["config"].l.setList(self.list)
 
 	def keyGo(self):
+		self.source.save()
+		configfile.save()
 		XMLdata = self.fetchURL()
 		if XMLdata:
 			if self.validXML(XMLdata):
