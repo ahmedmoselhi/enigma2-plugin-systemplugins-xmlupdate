@@ -1,6 +1,7 @@
 from __future__ import print_function
 # for localized messages
 from . import _
+import re
 
 from six.moves.urllib.request import Request, urlopen
 from six.moves.urllib.error import URLError, HTTPError
@@ -97,7 +98,7 @@ class xmlUpdate(ConfigListScreen, Screen):
 			response = urlopen(req)
 			print('[xmlUpdate][fetchURL] Response: %d' % response.getcode())
 			if int(response.getcode()) == 200:
-				return ensure_str(response.read())
+				return self.decodeResponse(response.read())
 		except HTTPError as err:
 			print('[xmlUpdate][fetchURL] ERROR:', err)
 		except URLError as err:
@@ -106,6 +107,18 @@ class xmlUpdate(ConfigListScreen, Screen):
 			import sys
 			print('[xmlUpdate][fetchURL] undefined error', sys.exc_info()[0])
 		self.showError(_("The %s.xml file could not be fetched") % self.DVBtype.value)
+
+	def decodeResponse(self, data):
+		if isinstance(data, bytes):
+			encoding = "utf-8"
+			match = re.search(br'encoding=[\'"]([A-Za-z0-9._-]+)[\'"]', data[:200], re.IGNORECASE)
+			if match:
+				encoding = ensure_str(match.group(1), "ascii").lower()
+			try:
+				return data.decode(encoding)
+			except UnicodeDecodeError:
+				return data.decode("latin-1")
+		return ensure_str(data)
 
 	def validXML(self, XMLdata):  # Looks for closing documentElement, i.e. </satellites>, </cables>, or </locations>
 		return self.DVBtype.value in ('satellites', 'cables') and ("</%s>" % self.DVBtype.value) in XMLdata or self.DVBtype.value == "terrestrial" and "</locations>" in XMLdata
