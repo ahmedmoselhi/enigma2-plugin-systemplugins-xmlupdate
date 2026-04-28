@@ -73,8 +73,7 @@ class xmlUpdate(ConfigListScreen, Screen):
 		self["config"].l.setList(self.list)
 
 	def keyGo(self):
-		self.source.save()
-		configfile.save()
+		self.saveConfig()
 		XMLdata = self.fetchURL()
 		if XMLdata:
 			if self.validXML(XMLdata):
@@ -93,7 +92,13 @@ class xmlUpdate(ConfigListScreen, Screen):
 				self.showError(_("The %s.xml download was corrupt.") % self.DVBtype.value)
 
 	def keyCancel(self):
+		self.source.cancel()
 		self.close()
+
+	def saveConfig(self):
+		self.source.save()
+		config.plugins.xmlupdate.save()
+		configfile.save()
 
 	def fetchURL(self):
 		try:
